@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Tech - News</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="news-buttons.css">
+    <style>
+        body {
+            background-color: #d4f7d4; /* Light green */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Farmers Tech</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="news.html" class="active">News</a></li>
+                <li><a href="#tips">Tips</a></li>
+                <li><a href="#market">Marketplace</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="section">
+            <h2>Farm News</h2>
+            <div class="news-grid">
+                <article>
+                    <h3>Crop Prices Rise in Midwest</h3>
+                    <p>Wheat and corn prices are up 15% due to strong export demand. Stay updated on market trends.</p>
+                </article>
+                <article>
+                    <h3>New Pest Control Methods</h3>
+                    <p>Integrated pest management techniques are proving effective against aphids in soybean fields.</p>
+                </article>
+                <article>
+                    <h3>Government Subsidies Extended</h3>
+                    <p>Farmers can apply for extended drought relief subsidies through the end of the year.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Farmers Tech. All rights reserved.</p>
+    </footer>
+    <script>
+        async function fetchCurrentNews() {
+            try {
+                const response = await fetch('http://localhost:3000/api/news');
+                const data = await response.json();
+                const newsGrid = document.querySelector('.news-grid');
+                newsGrid.innerHTML = '';
+                let articles = data.articles || [];
+                if (articles.length > 0) {
+                    articles.forEach(article => {
+                        const newsItem = document.createElement('article');
+                        newsItem.innerHTML = `
+                            <h3>${article.title}</h3>
+                            <p>${article.description || ''}</p>
+                            <a href="${article.url}" target="_blank">Read more</a>
+                        `;
+                        newsGrid.appendChild(newsItem);
+                    });
+                } else {
+                    newsGrid.innerHTML = '<p>No news found.</p>';
+                }
+            } catch (error) {
+                document.querySelector('.news-grid').innerHTML = '<p>Error loading news.</p>';
+            }
+        }
+        window.onload = fetchCurrentNews;
+    </script>
+</body>
+</html>
