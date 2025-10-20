@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Tech - Resources for Farmers</title>
+    <link rel="stylesheet" href="styles.css">
+        <style>
+            body {
+                background-color: #d4f7d4; /* Light green */
+            }
+        </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="/newspage/news.html" target="_blank" style="color:inherit;text-decoration:none;">Farmers Tech</a></div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="news.html" target="_blank">News</a></li>
+                <li><a href="#tips">Tips</a></li>
+                <li><a href="#market">Marketplace</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li id="login-nav-item"><button class="login-btn" onclick="document.getElementById('login-bar').style.display='block'">Login</button></li>
+            </ul>
+        </nav>
+        <div id="login-bar" class="login-bar" style="display:none;">
+            <form class="login-form">
+                <div class="input-icon-group">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="loginName" placeholder="Name" required>
+                </div>
+                <div class="input-icon-group">
+                    <span class="input-icon">🆔</span>
+                    <input type="text" placeholder="Username" required>
+                </div>
+                <div class="input-icon-group">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                </div>
+                <span style="color:#d32f2f; font-size:0.95em; display:none;" id="passwordError">Password must be at least 6 characters and include uppercase, lowercase, number, and special character.</span>
+                <button type="submit">Sign In</button>
+                <button type="button" onclick="document.getElementById('login-bar').style.display='none'">Cancel</button>
+            </form>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-bg-slideshow"></div> <!-- New: Slideshow container for smooth transitions -->
+        <div class="hero-content">
+            <h1>Welcome to Farmers Tech</h1>
+            <p>Your one-stop resource for farming news, tips, and marketplace connections. Grow smarter, sell better.</p>
+            
+            <!-- Search Bar -->
+            <form id="searchForm" class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for news, tips, or products..." required>
+                <button type="submit">Search</button>
+            </form>
+            
+            <button onclick="showWeather()">Check Local Weather</button>
+        </div>
+    </section>
+           
+    <section id="contact" class="section">
+        <h2>Contact Us</h2>
+        <p>Email: avidulariya@gmail.com | Phone:9549471291</p>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025  Farmers Tech. All rights reserved. | Built for farmers, by farmers.
+                   Created by "Amit Dulariya".
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+<script>
+document.querySelector('.login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var pwd = document.getElementById('loginPassword');
+    var error = document.getElementById('passwordError');
+    var nameInput = document.getElementById('loginName');
+    var name = nameInput.value.trim();
+    var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
+    if (!pattern.test(pwd.value)) {
+        error.style.display = 'block';
+        pwd.focus();
+        return false;
+    } else if (!name) {
+        nameInput.focus();
+        return false;
+    } else {
+        error.style.display = 'none';
+        document.getElementById('login-bar').style.display = 'none';
+        // Replace login button with user's name, styled as a nav link
+        setTimeout(function() {
+            var loginNavItem = document.getElementById('login-nav-item');
+            if (loginNavItem) {
+                loginNavItem.innerHTML = '<a href="#" class="login-user-name" style="font-weight:600;color:#2c5f2d;padding:0.5rem 1rem;border-radius:4px;text-decoration:none;">' + name + '</a>';
+            }
+        }, 200);
+    }
+});
+</script>
+</body>
+</html>
