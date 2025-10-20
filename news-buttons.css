@@ -1,0 +1,33 @@
+/* Button arrangement and styling for Farmers Tech news page */
+
+button, .news-grid button, .section button, form button {
+    display: inline-block;
+    background: #2c5f2d;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0.5rem;
+    transition: background 0.2s;
+}
+
+button:hover, .news-grid button:hover, .section button:hover, form button:hover {
+    background: #1e3f1f;
+}
+
+/* Center buttons in forms and sections */
+form, .section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Responsive button layout for mobile */
+@media (max-width: 600px) {
+    button, .news-grid button, .section button, form button {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+}
